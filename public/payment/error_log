@@ -1,0 +1,7 @@
+[22-May-2022 17:59:14 UTC] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Square\Models\OrderLineItem::__construct(), 0 passed in /home/highstar/public_html/payment/checkout.php on line 45 and exactly 1 expected in /home/highstar/public_html/payment/vendor/square/square/src/Models/OrderLineItem.php:118
+Stack trace:
+#0 /home/highstar/public_html/payment/checkout.php(45): Square\Models\OrderLineItem->__construct()
+#1 {main}
+  thrown in /home/highstar/public_html/payment/vendor/square/square/src/Models/OrderLineItem.php on line 118
+[05-Jun-2022 12:34:16 UTC] PHP Warning:  A non-numeric value encountered in /home/highstar/public_html/payment/checkout.php on line 43
+[05-Jun-2022 12:35:51 UTC] PHP Warning:  A non-numeric value encountered in /home/highstar/public_html/payment/checkout.php on line 43
