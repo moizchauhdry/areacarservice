@@ -33,7 +33,7 @@ class UserController extends Controller
             ],
             'after_completion' => [
                 'type' => 'redirect',
-                'redirect' => ['url' => 'https://example.com'],
+                'redirect' => ['url' => 'https://areacarservice.com'],
             ],
         ]);
 
