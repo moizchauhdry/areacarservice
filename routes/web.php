@@ -41,7 +41,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/invoice/{id}', 'PrintController@invoice')->name('invoice');
-
 Route::get('/signature/{id}', 'PrintController@signature')->name('admin.signature');
 Route::post('/signature/upload/{id}', 'PrintController@uploadSignature')->name('admin.signature.upload');
 Route::get('/generate/{id}', 'PrintController@generate')->name('admin.generate');

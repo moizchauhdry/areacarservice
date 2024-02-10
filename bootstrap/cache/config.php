@@ -1,224 +1,4 @@
 <?php return array (
-  'auth' => 
-  array (
-    'defaults' => 
-    array (
-      'guard' => 'web',
-      'passwords' => 'users',
-    ),
-    'guards' => 
-    array (
-      'web' => 
-      array (
-        'driver' => 'session',
-        'provider' => 'users',
-      ),
-      'admin' => 
-      array (
-        'driver' => 'session',
-        'provider' => 'admins',
-      ),
-      'api' => 
-      array (
-        'driver' => 'token',
-        'provider' => 'users',
-      ),
-    ),
-    'providers' => 
-    array (
-      'users' => 
-      array (
-        'driver' => 'eloquent',
-        'model' => 'App\\Model\\user\\User',
-      ),
-      'admins' => 
-      array (
-        'driver' => 'eloquent',
-        'model' => 'App\\Model\\admin\\admin',
-      ),
-    ),
-    'passwords' => 
-    array (
-      'users' => 
-      array (
-        'provider' => 'users',
-        'table' => 'password_resets',
-        'expire' => 60,
-      ),
-      'admins' => 
-      array (
-        'provider' => 'admins',
-        'table' => 'password_resets',
-        'expire' => 60,
-      ),
-    ),
-  ),
-  'filesystems' => 
-  array (
-    'default' => 'local',
-    'cloud' => 's3',
-    'disks' => 
-    array (
-      'local' => 
-      array (
-        'driver' => 'local',
-        'root' => '/home7/areacarservice/admin.areacarservice.com/storage/app',
-      ),
-      'public' => 
-      array (
-        'driver' => 'local',
-        'root' => '/home7/areacarservice/admin.areacarservice.com/storage/app/public',
-        'url' => 'http://localhost/storage',
-        'visibility' => 'public',
-      ),
-      's3' => 
-      array (
-        'driver' => 's3',
-        'key' => NULL,
-        'secret' => NULL,
-        'region' => NULL,
-        'bucket' => NULL,
-      ),
-    ),
-  ),
-  'broadcasting' => 
-  array (
-    'default' => 'log',
-    'connections' => 
-    array (
-      'pusher' => 
-      array (
-        'driver' => 'pusher',
-        'key' => '',
-        'secret' => '',
-        'app_id' => '',
-        'options' => 
-        array (
-        ),
-      ),
-      'redis' => 
-      array (
-        'driver' => 'redis',
-        'connection' => 'default',
-      ),
-      'log' => 
-      array (
-        'driver' => 'log',
-      ),
-      'null' => 
-      array (
-        'driver' => 'null',
-      ),
-    ),
-  ),
-  'mail' => 
-  array (
-    'driver' => 'sendmail',
-    'host' => 'smtp.sendgrid.net',
-    'port' => '25',
-    'from' => 
-    array (
-      'address' => 'info@highstarlimo.com',
-      'name' => 'HighstarLimo Inc',
-    ),
-    'encryption' => 'TLS',
-    'username' => 'apikey',
-    'password' => 'Wyhit7896@Luy56',
-    'sendmail' => '/usr/sbin/sendmail -bs',
-    'markdown' => 
-    array (
-      'theme' => 'default',
-      'paths' => 
-      array (
-        0 => '/home7/areacarservice/admin.areacarservice.com/resources/views/vendor/mail',
-      ),
-    ),
-  ),
-  'session' => 
-  array (
-    'driver' => 'file',
-    'lifetime' => 120,
-    'expire_on_close' => false,
-    'encrypt' => false,
-    'files' => '/home7/areacarservice/admin.areacarservice.com/storage/framework/sessions',
-    'connection' => NULL,
-    'table' => 'sessions',
-    'store' => NULL,
-    'lottery' => 
-    array (
-      0 => 2,
-      1 => 100,
-    ),
-    'cookie' => 'laravel_session',
-    'path' => '/',
-    'domain' => NULL,
-    'secure' => false,
-    'http_only' => true,
-  ),
-  'database' => 
-  array (
-    'default' => 'mysql',
-    'connections' => 
-    array (
-      'sqlite' => 
-      array (
-        'driver' => 'sqlite',
-        'database' => 'areacarservice_admin',
-        'prefix' => '',
-      ),
-      'mysql' => 
-      array (
-        'driver' => 'mysql',
-        'host' => '127.0.0.1',
-        'port' => '3306',
-        'database' => 'areacarservice_admin',
-        'username' => 'areacarservice_admin',
-        'password' => 'M82xD3f%%ZUm',
-        'unix_socket' => '',
-        'charset' => 'utf8mb4',
-        'collation' => 'utf8mb4_unicode_ci',
-        'prefix' => '',
-        'strict' => true,
-        'engine' => NULL,
-      ),
-      'pgsql' => 
-      array (
-        'driver' => 'pgsql',
-        'host' => '127.0.0.1',
-        'port' => '3306',
-        'database' => 'areacarservice_admin',
-        'username' => 'areacarservice_admin',
-        'password' => 'M82xD3f%%ZUm',
-        'charset' => 'utf8',
-        'prefix' => '',
-        'schema' => 'public',
-        'sslmode' => 'prefer',
-      ),
-      'sqlsrv' => 
-      array (
-        'driver' => 'sqlsrv',
-        'host' => '127.0.0.1',
-        'port' => '3306',
-        'database' => 'areacarservice_admin',
-        'username' => 'areacarservice_admin',
-        'password' => 'M82xD3f%%ZUm',
-        'charset' => 'utf8',
-        'prefix' => '',
-      ),
-    ),
-    'migrations' => 'migrations',
-    'redis' => 
-    array (
-      'client' => 'predis',
-      'default' => 
-      array (
-        'host' => '127.0.0.1',
-        'password' => NULL,
-        'port' => '6379',
-        'database' => 0,
-      ),
-    ),
-  ),
   'app' => 
   array (
     'name' => 'Area Car Service',
@@ -301,6 +81,90 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade',
     ),
   ),
+  'auth' => 
+  array (
+    'defaults' => 
+    array (
+      'guard' => 'web',
+      'passwords' => 'users',
+    ),
+    'guards' => 
+    array (
+      'web' => 
+      array (
+        'driver' => 'session',
+        'provider' => 'users',
+      ),
+      'admin' => 
+      array (
+        'driver' => 'session',
+        'provider' => 'admins',
+      ),
+      'api' => 
+      array (
+        'driver' => 'token',
+        'provider' => 'users',
+      ),
+    ),
+    'providers' => 
+    array (
+      'users' => 
+      array (
+        'driver' => 'eloquent',
+        'model' => 'App\\Model\\user\\User',
+      ),
+      'admins' => 
+      array (
+        'driver' => 'eloquent',
+        'model' => 'App\\Model\\admin\\admin',
+      ),
+    ),
+    'passwords' => 
+    array (
+      'users' => 
+      array (
+        'provider' => 'users',
+        'table' => 'password_resets',
+        'expire' => 60,
+      ),
+      'admins' => 
+      array (
+        'provider' => 'admins',
+        'table' => 'password_resets',
+        'expire' => 60,
+      ),
+    ),
+  ),
+  'broadcasting' => 
+  array (
+    'default' => 'log',
+    'connections' => 
+    array (
+      'pusher' => 
+      array (
+        'driver' => 'pusher',
+        'key' => '',
+        'secret' => '',
+        'app_id' => '',
+        'options' => 
+        array (
+        ),
+      ),
+      'redis' => 
+      array (
+        'driver' => 'redis',
+        'connection' => 'default',
+      ),
+      'log' => 
+      array (
+        'driver' => 'log',
+      ),
+      'null' => 
+      array (
+        'driver' => 'null',
+      ),
+    ),
+  ),
   'cache' => 
   array (
     'default' => 'file',
@@ -323,7 +187,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/home7/areacarservice/admin.areacarservice.com/storage/framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\areacarservice\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -355,28 +219,119 @@
     ),
     'prefix' => 'laravel',
   ),
-  'services' => 
+  'database' => 
   array (
-    'mailgun' => 
+    'default' => 'mysql',
+    'connections' => 
     array (
-      'domain' => NULL,
-      'secret' => NULL,
+      'sqlite' => 
+      array (
+        'driver' => 'sqlite',
+        'database' => 'areacarservice_admin',
+        'prefix' => '',
+      ),
+      'mysql' => 
+      array (
+        'driver' => 'mysql',
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'database' => 'areacarservice_admin',
+        'username' => 'root',
+        'password' => '',
+        'unix_socket' => '',
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'strict' => true,
+        'engine' => NULL,
+      ),
+      'pgsql' => 
+      array (
+        'driver' => 'pgsql',
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'database' => 'areacarservice_admin',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
+        'prefix' => '',
+        'schema' => 'public',
+        'sslmode' => 'prefer',
+      ),
+      'sqlsrv' => 
+      array (
+        'driver' => 'sqlsrv',
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'database' => 'areacarservice_admin',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
+        'prefix' => '',
+      ),
     ),
-    'ses' => 
+    'migrations' => 'migrations',
+    'redis' => 
     array (
-      'key' => NULL,
-      'secret' => NULL,
-      'region' => 'us-east-1',
+      'client' => 'predis',
+      'default' => 
+      array (
+        'host' => '127.0.0.1',
+        'password' => NULL,
+        'port' => '6379',
+        'database' => 0,
+      ),
     ),
-    'sparkpost' => 
+  ),
+  'filesystems' => 
+  array (
+    'default' => 'local',
+    'cloud' => 's3',
+    'disks' => 
     array (
-      'secret' => NULL,
+      'local' => 
+      array (
+        'driver' => 'local',
+        'root' => 'C:\\xampp\\htdocs\\areacarservice\\storage\\app',
+      ),
+      'public' => 
+      array (
+        'driver' => 'local',
+        'root' => 'C:\\xampp\\htdocs\\areacarservice\\storage\\app/public',
+        'url' => 'http://localhost/storage',
+        'visibility' => 'public',
+      ),
+      's3' => 
+      array (
+        'driver' => 's3',
+        'key' => NULL,
+        'secret' => NULL,
+        'region' => NULL,
+        'bucket' => NULL,
+      ),
     ),
-    'stripe' => 
+  ),
+  'mail' => 
+  array (
+    'driver' => 'smtp',
+    'host' => 'sandbox.smtp.mailtrap.io',
+    'port' => '2525',
+    'from' => 
     array (
-      'model' => 'App\\User',
-      'key' => NULL,
-      'secret' => NULL,
+      'address' => 'hello@example.com',
+      'name' => 'Example',
+    ),
+    'encryption' => 'tls',
+    'username' => 'b33ddc2ffc2ecd',
+    'password' => '16ee991924cd15',
+    'sendmail' => '/usr/sbin/sendmail -bs',
+    'markdown' => 
+    array (
+      'theme' => 'default',
+      'paths' => 
+      array (
+        0 => 'C:\\xampp\\htdocs\\areacarservice\\resources\\views/vendor/mail',
+      ),
     ),
   ),
   'queue' => 
@@ -425,13 +380,58 @@
       'table' => 'failed_jobs',
     ),
   ),
+  'services' => 
+  array (
+    'mailgun' => 
+    array (
+      'domain' => NULL,
+      'secret' => NULL,
+    ),
+    'ses' => 
+    array (
+      'key' => NULL,
+      'secret' => NULL,
+      'region' => 'us-east-1',
+    ),
+    'sparkpost' => 
+    array (
+      'secret' => NULL,
+    ),
+    'stripe' => 
+    array (
+      'model' => 'App\\User',
+      'key' => NULL,
+      'secret' => NULL,
+    ),
+  ),
+  'session' => 
+  array (
+    'driver' => 'file',
+    'lifetime' => 120,
+    'expire_on_close' => false,
+    'encrypt' => false,
+    'files' => 'C:\\xampp\\htdocs\\areacarservice\\storage\\framework/sessions',
+    'connection' => NULL,
+    'table' => 'sessions',
+    'store' => NULL,
+    'lottery' => 
+    array (
+      0 => 2,
+      1 => 100,
+    ),
+    'cookie' => 'laravel_session',
+    'path' => '/',
+    'domain' => NULL,
+    'secure' => false,
+    'http_only' => true,
+  ),
   'view' => 
   array (
     'paths' => 
     array (
-      0 => '/home7/areacarservice/admin.areacarservice.com/resources/views',
+      0 => 'C:\\xampp\\htdocs\\areacarservice\\resources\\views',
     ),
-    'compiled' => '/home7/areacarservice/admin.areacarservice.com/storage/framework/views',
+    'compiled' => 'C:\\xampp\\htdocs\\areacarservice\\storage\\framework\\views',
   ),
   'dompdf' => 
   array (
@@ -439,10 +439,10 @@
     'orientation' => 'portrait',
     'defines' => 
     array (
-      'font_dir' => '/home7/areacarservice/admin.areacarservice.com/storage/fonts/',
-      'font_cache' => '/home7/areacarservice/admin.areacarservice.com/storage/fonts/',
-      'temp_dir' => '/tmp',
-      'chroot' => '/home7/areacarservice/admin.areacarservice.com',
+      'font_dir' => 'C:\\xampp\\htdocs\\areacarservice\\storage\\fonts/',
+      'font_cache' => 'C:\\xampp\\htdocs\\areacarservice\\storage\\fonts/',
+      'temp_dir' => 'C:\\Users\\MOIZAK~1\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\xampp\\htdocs\\areacarservice',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',

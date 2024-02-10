@@ -8,16 +8,47 @@ use App\Model\admin\role;
 use App\Mail\Reminder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Stripe\StripeClient;
 
 class UserController extends Controller
 {
+    private function stripePaymentLink($price)
+    {
+        $stripe = new StripeClient('sk_test_51GspqPCGY6FvdoyjgWgpNxB2al2R6ZPxbumRTTIOK2OjRHIpuRwHWmZyymOs2itJMUZHz0TQLvXk37clOSyvXyNv00KFGood2n');
+
+        $product = $stripe->products->create(['name' => 'Area Car Service']);
+
+        $price = $stripe->prices->create([
+            'currency' => 'usd',
+            'unit_amount' => $price * 100,
+            'product' => $product->id,
+        ]);
+
+        $payment_link = $stripe->paymentLinks->create([
+            'line_items' => [
+                [
+                    'price' => $price->id,
+                    'quantity' => 1,
+                ],
+            ],
+            'after_completion' => [
+                'type' => 'redirect',
+                'redirect' => ['url' => 'https://example.com'],
+            ],
+        ]);
+
+        return $payment_link->url;
+    }
+
+
     private function invoiceConfirmationMail($customer)
     {
         try {
 
             $booking_date = date('m/d/Y h:i A', strtotime($customer->date));
             if ($customer->signature_date) {
-                $payment_url = 'https://admin.areacarservice.com/public/payment/checkout.php?pickup=' . $customer->pickup . "&&destination=" . $customer->destination . ' Booking Date: ' . $booking_date . '&&amount=' . $customer->price;
+                // $payment_url = 'https://admin.areacarservice.com/public/payment/checkout.php?pickup=' . $customer->pickup . "&&destination=" . $customer->destination . ' Booking Date: ' . $booking_date . '&&amount=' . $customer->price;
+                $payment_url = $this->stripePaymentLink($customer->price);
             } else {
                 $payment_url = route('admin.signature', $customer->id);
             }
@@ -67,7 +98,7 @@ class UserController extends Controller
             $_data = json_encode($mail_data);
             $headers = array(
                 'Content-Type: application/json',
-                'Authorization:Bearer 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',
+                'Authorization:Bearer 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',
             );
 
             $curl = curl_init($url);
@@ -77,47 +108,28 @@ class UserController extends Controller
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $response = curl_exec($curl);
         } catch (\Throwable $th) {
+            return $th;
             dd($th);
         }
     }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth:admin');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $users = User::orderBy('id', 'desc')->get();
         return view('admin.user.show', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roles = role::all();
         return view('admin.user.create', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -191,37 +203,17 @@ class UserController extends Controller
         return redirect(route('user.index'));
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = User::find($id);
         return view('admin.user.edit', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -283,20 +275,11 @@ class UserController extends Controller
         return redirect(route('user.index'))->with('message', 'Customer updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         User::where('id', $id)->delete();
         return redirect()->back()->with('message', 'Customer is deleted successfully');
     }
-
-
-    // *************************************************************** //
 
     public function clear($id)
     {
