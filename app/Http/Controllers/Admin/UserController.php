@@ -107,6 +107,7 @@ class UserController extends Controller
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $response = curl_exec($curl);
+            dd($response);
         } catch (\Throwable $th) {
             return $th;
             dd($th);
