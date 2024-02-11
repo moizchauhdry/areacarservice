@@ -12,15 +12,29 @@ use Stripe\StripeClient;
 
 class UserController extends Controller
 {
-    private function stripePaymentLink($price)
+    private function stripePaymentLink($customer)
     {
         $stripe = new StripeClient('sk_test_51GspqPCGY6FvdoyjgWgpNxB2al2R6ZPxbumRTTIOK2OjRHIpuRwHWmZyymOs2itJMUZHz0TQLvXk37clOSyvXyNv00KFGood2n');
 
-        $product = $stripe->products->create(['name' => 'Area Car Service']);
+
+        $product = $stripe->products->create([
+            'name' => 'PAY AREA CAR SERVICE',
+            'description' => "
+                Name:" . $customer->name . "
+                Email:" . $customer->email . "
+                Phone:" . $customer->phone . "
+                Pick:" . $customer->pickup . "
+                Destination:" . $customer->destination . "
+                Date:" . $customer->date . "
+                Passangers:" . $customer->nop . "
+                Luggages:" . $customer->nol . "
+                Vehicle:" . $customer->vehicle . "
+            "
+        ]);
 
         $price = $stripe->prices->create([
             'currency' => 'usd',
-            'unit_amount' => $price * 100,
+            'unit_amount' => $customer->price * 100,
             'product' => $product->id,
         ]);
 
@@ -48,7 +62,7 @@ class UserController extends Controller
             $booking_date = date('m/d/Y h:i A', strtotime($customer->date));
             if ($customer->signature_date) {
                 // $payment_url = 'https://admin.areacarservice.com/public/payment/checkout.php?pickup=' . $customer->pickup . "&&destination=" . $customer->destination . ' Booking Date: ' . $booking_date . '&&amount=' . $customer->price;
-                $payment_url = $this->stripePaymentLink($customer->price);
+                $payment_url = $this->stripePaymentLink($customer);
             } else {
                 $payment_url = route('admin.signature', $customer->id);
             }
@@ -98,7 +112,7 @@ class UserController extends Controller
             $_data = json_encode($mail_data);
             $headers = array(
                 'Content-Type: application/json',
-                'Authorization:Bearer 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',
+                'Authorization:Bearer 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',
             );
 
             $curl = curl_init($url);
@@ -107,6 +121,8 @@ class UserController extends Controller
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $response = curl_exec($curl);
+
+            dd($response);
         } catch (\Throwable $th) {
             return $th;
             // dd($th);
