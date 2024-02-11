@@ -2,6 +2,7 @@
   'app' => 
   array (
     'name' => 'Area Car Service',
+    'SEND_GRID_API_KEY' => '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',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost',

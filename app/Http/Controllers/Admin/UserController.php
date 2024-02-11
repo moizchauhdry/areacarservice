@@ -112,7 +112,7 @@ class UserController extends Controller
             $_data = json_encode($mail_data);
             $headers = array(
                 'Content-Type: application/json',
-                'Authorization:Bearer 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',
+                'Authorization:Bearer ' . config('app.SEND_GRID_API_KEY'),
             );
 
             $curl = curl_init($url);
@@ -122,7 +122,6 @@ class UserController extends Controller
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $response = curl_exec($curl);
 
-            dd($response);
         } catch (\Throwable $th) {
             return $th;
             // dd($th);

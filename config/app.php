@@ -13,6 +13,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'SEND_GRID_API_KEY' => env('SEND_GRID_API_KEY', NULL),
 
     /*
     |--------------------------------------------------------------------------
