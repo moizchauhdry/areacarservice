@@ -84,7 +84,7 @@ class PrintController extends Controller
                 "content" => [
                     ["type" => "text/html", "value" => "Customer Contract"]
                 ],
-                "template_id" =>  "d-85c5ccc3903e49e195e75bd8d69f5aed "
+                "template_id" =>  "d-85c5ccc3903e49e195e75bd8d69f5aed"
             ];
 
             $url = 'https://api.sendgrid.com/v3/mail/send';

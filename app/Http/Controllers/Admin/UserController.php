@@ -122,7 +122,6 @@ class UserController extends Controller
             $response = curl_exec($curl);
 
         } catch (\Throwable $th) {
-            return $th;
             // dd($th);
         }
     }
