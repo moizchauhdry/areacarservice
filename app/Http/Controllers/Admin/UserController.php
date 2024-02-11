@@ -14,8 +14,8 @@ class UserController extends Controller
 {
     private function stripePaymentLink($customer)
     {
-        $stripe = new StripeClient('sk_test_51GspqPCGY6FvdoyjgWgpNxB2al2R6ZPxbumRTTIOK2OjRHIpuRwHWmZyymOs2itJMUZHz0TQLvXk37clOSyvXyNv00KFGood2n');
-
+        $STRIPE_SECRET_KEY = config('app.STRIPE_SECRET_KEY');
+        $stripe = new StripeClient($STRIPE_SECRET_KEY);
 
         $product = $stripe->products->create([
             'name' => 'PAY AREA CAR SERVICE',

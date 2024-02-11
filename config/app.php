@@ -14,6 +14,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'SEND_GRID_API_KEY' => env('SEND_GRID_API_KEY', NULL),
+    'STRIPE_SECRET_KEY' => env('STRIPE_SECRET_KEY', NULL),
 
     /*
     |--------------------------------------------------------------------------
