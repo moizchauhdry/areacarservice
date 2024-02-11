@@ -5,7 +5,7 @@
     <span class="logo-mini"><b>A</b>CS</span>
     <!-- logo for regular state and mobile devices -->
     {{-- <span class="logo-lg"><b>Area Car Service</b>Inc.</span> --}}
-    <img src="{{asset('public/images/logo.png')}}" alt="" style="width: 80px;">
+    <img src="https://areacarservice.com/wp-content/uploads/2023/09/area-carlogo-white-blue.png" alt="" style="width: 80px;">
   </a>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
