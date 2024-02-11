@@ -9,9 +9,52 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use setasign\Fpdi\Fpdi;
 use PDF;
+use Stripe\StripeClient;
 
 class PrintController extends Controller
 {
+    private function stripePaymentLink($customer)
+    {
+        $stripe = new StripeClient('sk_test_51GspqPCGY6FvdoyjgWgpNxB2al2R6ZPxbumRTTIOK2OjRHIpuRwHWmZyymOs2itJMUZHz0TQLvXk37clOSyvXyNv00KFGood2n');
+
+
+        $product = $stripe->products->create([
+            'name' => 'PAY AREA CAR SERVICE',
+            'description' => "
+                Name:" . $customer->name . "
+                Email:" . $customer->email . "
+                Phone:" . $customer->phone . "
+                Pick:" . $customer->pickup . "
+                Destination:" . $customer->destination . "
+                Date:" . $customer->date . "
+                Passangers:" . $customer->nop . "
+                Luggages:" . $customer->nol . "
+                Vehicle:" . $customer->vehicle . "
+            "
+        ]);
+
+        $price = $stripe->prices->create([
+            'currency' => 'usd',
+            'unit_amount' => $customer->price * 100,
+            'product' => $product->id,
+        ]);
+
+        $payment_link = $stripe->paymentLinks->create([
+            'line_items' => [
+                [
+                    'price' => $price->id,
+                    'quantity' => 1,
+                ],
+            ],
+            'after_completion' => [
+                'type' => 'redirect',
+                'redirect' => ['url' => 'https://areacarservice.com'],
+            ],
+        ]);
+
+        return $payment_link->url;
+    }
+
     private function customerContractEmail($customer)
     {
         try {
@@ -48,7 +91,7 @@ class PrintController extends Controller
             $_data = json_encode($mail_data);
             $headers = array(
                 'Content-Type: application/json',
-                'Authorization:Bearer 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',
+                'Authorization:Bearer ' . config('app.SEND_GRID_API_KEY'),
             );
 
             $curl = curl_init($url);
@@ -116,10 +159,12 @@ class PrintController extends Controller
 
         $this->customerContractEmail($customer);
 
-        $booking_date = date('m/d/Y h:i A', strtotime($customer->date));
-        $url = 'https://admin.areacarservice.com/public/payment/checkout.php?pickup=' . $customer->pickup . "&&destination=" . $customer->destination . ' Booking Date: ' . $booking_date . '&&amount=' . $customer->price;
+        $payment_url = $this->stripePaymentLink($customer);
 
-        return Redirect::to($url);
+        // $booking_date = date('m/d/Y h:i A', strtotime($customer->date));
+        // $url = 'https://admin.areacarservice.com/public/payment/checkout.php?pickup=' . $customer->pickup . "&&destination=" . $customer->destination . ' Booking Date: ' . $booking_date . '&&amount=' . $customer->price;
+
+        return Redirect::to($payment_url);
     }
 
     public function generate($id)

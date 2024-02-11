@@ -54,7 +54,6 @@ class UserController extends Controller
         return $payment_link->url;
     }
 
-
     private function invoiceConfirmationMail($customer)
     {
         try {
