@@ -98,7 +98,7 @@ class UserController extends Controller
             $_data = json_encode($mail_data);
             $headers = array(
                 'Content-Type: application/json',
-                'Authorization:Bearer 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',
+                'Authorization:Bearer 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',
             );
 
             $curl = curl_init($url);
@@ -107,10 +107,10 @@ class UserController extends Controller
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $response = curl_exec($curl);
-            dd($response);
+            // dd($response);
         } catch (\Throwable $th) {
             return $th;
-            dd($th);
+            // dd($th);
         }
     }
 
