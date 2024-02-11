@@ -98,7 +98,7 @@ class UserController extends Controller
             $_data = json_encode($mail_data);
             $headers = array(
                 'Content-Type: application/json',
-                'Authorization:Bearer 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',
+                'Authorization:Bearer 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',
             );
 
             $curl = curl_init($url);
