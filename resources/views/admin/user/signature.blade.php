@@ -35,7 +35,7 @@
     <div class="mb-4" style="background:black">
         <div class="d-flex justify-content-center">
             <div class="p-3">
-                <img src="https://areacarservice.com/wp-content/uploads/2023/09/area-carlogo-white-blue.png" alt="">
+                <img style="width: 200px" src="https://areacarservice.com/wp-content/uploads/2023/09/area-carlogo-white-blue.png" alt="">
             </div>
         </div>
     </div>
